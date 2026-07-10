@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>波叔叔 · 个人主页</title>
+<meta name="description" content="波叔叔的个人主页 - 探索AI、技术与创意的交汇点">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #8b5cf6;
+    --accent: #06b6d4;
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --text-lighter: #94a3b8;
+    --border: #e2e8f0;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --radius-lg: 20px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    transition: all 0.3s;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a:hover {
+    color: var(--text);
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text);
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 120px 32px 80px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at top left, rgba(99, 102, 241, 0.1), transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.1), transparent 50%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-text h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+  }
+
+  .hero-text h1 .gradient {
+    background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-text .subtitle {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin-bottom: 32px;
+    max-width: 500px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+  }
+
+  .btn-secondary {
+    background: white;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary-dark);
+  }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .avatar-container {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8rem;
+    color: white;
+    font-weight: 700;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.3);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .avatar-container::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    border: 2px dashed rgba(99, 102, 241, 0.3);
+    animation: spin 20s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .floating-tag {
+    position: absolute;
+    background: white;
+    padding: 12px 20px;
+    border-radius: 100px;
+    box-shadow: var(--shadow-lg);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .tag-1 { top: 40px; left: -20px; animation-delay: 0s; }
+  .tag-2 { bottom: 60px; right: -30px; animation-delay: 1s; }
+  .tag-3 { top: 50%; right: -40px; animation-delay: 2s; }
+
+  /* Sections */
+  .section {
+    padding: 100px 32px;
+  }
+
+  .section-alt {
+    background: var(--bg-alt);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .section-label {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary-dark);
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* About */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .about-image {
+    aspect-ratio: 4/5;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.2));
+  }
+
+  .about-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .about-content p {
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-size: 1rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 24px 16px;
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* Skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .skill-card {
+    background: white;
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: transparent;
+  }
+
+  .skill-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .skill-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+
+  .skill-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+
+  .skill-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .skill-tag {
+    padding: 4px 12px;
+    background: var(--bg-alt);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+  }
+
+  /* Projects */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
+  }
+
+  .project-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .project-image {
+    height: 220px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.2));
+  }
+
+  .project-body {
+    padding: 24px 28px 28px;
+  }
+
+  .project-category {
+    font-size: 0.8rem;
+    color: var(--primary-dark);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .project-desc {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+
+  .project-tech {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .project-tech span {
+    padding: 4px 10px;
+    background: var(--bg-alt);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+  }
+
+  /* Articles */
+  .articles-list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .article-item {
+    display: flex;
+    gap: 24px;
+    padding: 28px;
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .article-item:hover {
+    transform: translateX(8px);
+    box-shadow: var(--shadow);
+    border-color: var(--primary);
+  }
+
+  .article-date {
+    flex-shrink: 0;
+    width: 60px;
+    text-align: center;
+  }
+
+  .article-date .day {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    line-height: 1;
+  }
+
+  .article-date .month {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  .article-content {
+    flex: 1;
+  }
+
+  .article-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .article-excerpt {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 0.85rem;
+    color: var(--text-lighter);
+  }
+
+  .article-tag {
+    padding: 2px 10px;
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary-dark);
+    border-radius: 6px;
+    font-size: 0.8rem;
+  }
+
+  /* Contact */
+  .contact-section {
+    text-align: center;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto 48px;
+  }
+
+  .contact-card {
+    background: white;
+    padding: 32px 24px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .contact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .contact-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+  }
+
+  .contact-card h4 {
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+  }
+
+  .contact-card p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+
+  .contact-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary-dark);
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 12px;
+  }
+
+  /* Footer */
+  footer {
+    background: #0f172a;
+    color: var(--text-lighter);
+    padding: 48px 32px 32px;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    color: var(--text-lighter);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: white;
+  }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 32px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    font-size: 0.85rem;
+  }
+
+  /* Fade in animation */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive */
+  @media (max-width: 968px) {
+    .hero-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 40px;
+    }
+    .hero-text .subtitle { margin-left: auto; margin-right: auto; }
+    .hero-buttons { justify-content: center; }
+    .hero-visual { order: -1; }
+    .avatar-container { width: 240px; height: 240px; font-size: 6rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-image { max-width: 320px; margin: 0 auto; }
+  }
+
+  @media (max-width: 640px) {
+    .nav-inner { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .mobile-menu-btn { display: block; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-text h1 { font-size: 2.25rem; }
+    .hero-text .subtitle { font-size: 1.05rem; }
+    .section { padding: 64px 20px; }
+    .section-title { font-size: 1.75rem; }
+    .stats-grid { grid-template-columns: 1fr; gap: 16px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .article-item { flex-direction: column; gap: 16px; }
+    .article-date { width: auto; text-align: left; display: flex; gap: 8px; align-items: center; }
+    .article-date .day { font-size: 1.2rem; }
+    .floating-tag { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">波叔叔</div>
+    <ul class="nav-links">
+      <li><a href="#home">首页</a></li>
+      <li><a href="#about">关于</a></li>
+      <li><a href="#skills">技能</a></li>
+      <li><a href="#projects">项目</a></li>
+      <li><a href="#articles">文章</a></li>
+      <li><a href="#contact">联系</a></li>
+    </ul>
+    <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="home" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-text fade-in">
+      <h1>你好，我是<br><span class="gradient">波叔叔</span></h1>
+      <p class="subtitle">探索AI技术与创意的交汇点，分享对产品、技术和未来的思考。</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">查看项目 →</a>
+        <a href="#articles" class="btn btn-secondary">阅读文章</a>
+      </div>
+    </div>
+    <div class="hero-visual fade-in">
+      <div class="avatar-container">
+        波
+      </div>
+      <div class="floating-tag tag-1">🤖 AI 探索</div>
+      <div class="floating-tag tag-2">💻 产品思考</div>
+      <div class="floating-tag tag-3">🚀 持续学习</div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="section section-alt">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">关于我</span>
+      <h2 class="section-title">一点关于我的故事</h2>
+      <p class="section-subtitle">热爱技术，好奇未来，相信AI会改变我们工作和生活的方式</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-image fade-in">
+        👨‍💻
+      </div>
+      <div class="about-content fade-in">
+        <h3>技术爱好者 · 终身学习者</h3>
+        <p>
+          我是波叔叔，一个对技术和未来充满好奇的人。我关注人工智能、产品设计和互联网行业的发展，喜欢研究新工具、新思路，把前沿的技术落地到实际场景中。
+        </p>
+        <p>
+          这个网站是我的个人空间，用来记录和分享我对AI工具、产品趋势、技术方法论的思考。如果你也对这些话题感兴趣，欢迎交流。
+        </p>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">年互联网经验</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">20+</div>
+            <div class="stat-label">AI工具深度使用</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">学习热情</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills" class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">技能树</span>
+      <h2 class="section-title">我关注的领域</h2>
+      <p class="section-subtitle">在这些方向上持续学习和实践</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card fade-in">
+        <div class="skill-icon" style="background: linear-gradient(135deg, #818cf8, #6366f1);">🤖</div>
+        <h3>AI 应用与智能体</h3>
+        <p>探索AI Agent的实际应用场景，从智能体搭建到自动化工作流，让AI真正发挥生产力。</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Coze</span>
+          <span class="skill-tag">Agent</span>
+          <span class="skill-tag">Prompt</span>
+          <span class="skill-tag">RAG</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon" style="background: linear-gradient(135deg, #34d399, #10b981);">💡</div>
+        <h3>产品与设计思维</h3>
+        <p>关注用户体验和产品方法论，从需求分析到方案落地，用产品思维解决实际问题。</p>
+        <div class="skill-tags">
+          <span class="skill-tag">需求分析</span>
+          <span class="skill-tag">用户体验</span>
+          <span class="skill-tag">原型设计</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">📊</div>
+        <h3>数据与效率工具</h3>
+        <p>善用各类效率工具和数据分析方法，提升个人和团队的工作效率与决策质量。</p>
+        <div class="skill-tags">
+          <span class="skill-tag">数据分析</span>
+          <span class="skill-tag">自动化</span>
+          <span class="skill-tag">效率工具</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="section section-alt">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">作品展示</span>
+      <h2 class="section-title">最近做的一些东西</h2>
+      <p class="section-subtitle">用AI工具驱动的小项目和实践</p>
+    </div>
+    <div class="projects-grid">
+      <a href="articles/ai-platforms-comparison.html" class="project-card fade-in">
+        <div class="project-image">📊</div>
+        <div class="project-body">
+          <div class="project-category">研究报告</div>
+          <h3 class="project-title">AI开发平台对比分析</h3>
+          <p class="project-desc">深度对比CodeBuddy、Coze、Trae、Qoder四款AI产品的定位差异与选型指南。</p>
+          <div class="project-tech">
+            <span>AI编程</span>
+            <span>智能体</span>
+            <span>对比评测</span>
+          </div>
+        </div>
+      </a>
+      <div class="project-card fade-in">
+        <div class="project-image" style="background: linear-gradient(135deg, #f472b6, #ec4899);">🚧</div>
+        <div class="project-body">
+          <div class="project-category">进行中</div>
+          <h3 class="project-title">更多项目筹备中</h3>
+          <p class="project-desc">新的AI应用和工具探索在路上，敬请期待。</p>
+          <div class="project-tech">
+            <span>Coming Soon</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card fade-in">
+        <div class="project-image" style="background: linear-gradient(135deg, #38bdf8, #0ea5e9);">💭</div>
+        <div class="project-body">
+          <div class="project-category">想法池</div>
+          <h3 class="project-title">更多创意在酝酿</h3>
+          <p class="project-desc">关于AI、产品和效率的各种点子，慢慢落地中。</p>
+          <div class="project-tech">
+            <span>To Be Continued</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Articles -->
+<section id="articles" class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">文章</span>
+      <h2 class="section-title">思考与记录</h2>
+      <p class="section-subtitle">分享对AI、产品和技术的观察与思考</p>
+    </div>
+    <div class="articles-list">
+      <a href="articles/ai-platforms-comparison.html" class="article-item fade-in">
+        <div class="article-date">
+          <div class="day">10</div>
+          <div class="month">2026.07</div>
+        </div>
+        <div class="article-content">
+          <h3 class="article-title">四款AI开发平台对比：CodeBuddy / Coze / Trae / Qoder 怎么选？</h3>
+          <p class="article-excerpt">四款产品分属两个完全不同的品类，本文帮你厘清定位差异，找到最适合你的工具。</p>
+          <div class="article-meta">
+            <span class="article-tag">AI工具</span>
+            <span>阅读约 15 分钟</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section section-alt contact-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">联系我</span>
+      <h2 class="section-title">想聊点什么？</h2>
+      <p class="section-subtitle">对AI、产品或任何话题感兴趣，欢迎随时交流</p>
+    </div>
+    <div class="contact-grid">
+      <a href="mailto:hello@example.com" class="contact-card fade-in">
+        <div class="contact-icon">📧</div>
+        <h4>邮件</h4>
+        <p>发邮件给我</p>
+        <span class="contact-cta">hello@example.com →</span>
+      </a>
+      <a href="#" class="contact-card fade-in">
+        <div class="contact-icon">💬</div>
+        <h4>微信</h4>
+        <p>加好友聊聊</p>
+        <span class="contact-cta">查看联系方式 →</span>
+      </a>
+      <a href="#" class="contact-card fade-in">
+        <div class="contact-icon">🐙</div>
+        <h4>GitHub</h4>
+        <p>看看代码</p>
+        <span class="contact-cta">@username →</span>
+      </a>
+    </div>
+    <a href="mailto:hello@example.com" class="btn btn-primary fade-in">发送邮件联系我 ✉️</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">波叔叔</div>
+    <ul class="footer-links">
+      <li><a href="#home">首页</a></li>
+      <li><a href="#about">关于</a></li>
+      <li><a href="#projects">项目</a></li>
+      <li><a href="#articles">文章</a></li>
+      <li><a href="#contact">联系</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    © 2026 波叔叔 · 用AI折腾出来的个人网站
+  </div>
+</footer>
+
+<script>
+  // Fade in animation on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Active nav on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      if (window.scrollY >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.style.color = '';
+      if (link.getAttribute('href') === '#' + current) {
+        link.style.color = 'var(--text)';
+      }
+    });
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    if (links.style.display === 'flex') {
+      links.style.display = '';
+    } else {
+      links.style.display = 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '100%';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = 'white';
+      links.style.padding = '16px 24px';
+      links.style.boxShadow = 'var(--shadow-lg)';
+    }
+  }
+
+  // Navbar shadow on scroll
+  const nav = document.querySelector('.nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      nav.style.boxShadow = 'var(--shadow-sm)';
+    } else {
+      nav.style.boxShadow = '';
+    }
+  });
+</script>
+
+</body>
+</html>
