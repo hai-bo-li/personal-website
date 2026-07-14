@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeBuddy / Coze / Trae / Qoder 四款AI产品对比分析</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  :root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #8b5cf6;
+    --accent: #06b6d4;
+    --bg: #f8fafc;
+    --bg-card: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --text-lighter: #94a3b8;
+    --border: #e2e8f0;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --radius-lg: 16px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 80px 20px 100px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    animation: float 20s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, 30px); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero-tags {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 32px;
+  }
+
+  .hero-tag {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .hero-date {
+    margin-top: 24px;
+    font-size: 0.9rem;
+    opacity: 0.75;
+  }
+
+  /* Navigation */
+  .nav {
+    background: white;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 8px;
+    padding: 12px 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .nav a:hover {
+    background: #f1f5f9;
+    color: var(--text);
+  }
+
+  .nav a.active {
+    background: var(--primary);
+    color: white;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  .section {
+    margin-bottom: 80px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .section-subtitle {
+    color: var(--text-light);
+    margin-bottom: 32px;
+    font-size: 1.05rem;
+  }
+
+  /* Summary Card */
+  .summary-card {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 1px solid #bae6fd;
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    margin-bottom: 40px;
+  }
+
+  .summary-card h3 {
+    color: #0369a1;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+  }
+
+  .summary-card p {
+    color: #0c4a6e;
+    line-height: 1.8;
+  }
+
+  /* Category Cards */
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .category-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+
+  .category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .category-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .category-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+  }
+
+  .category-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+  }
+
+  .category-products {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .product-badge {
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  /* Product Detail Cards */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 24px;
+  }
+
+  @media (max-width: 600px) {
+    .product-grid { grid-template-columns: 1fr; }
+  }
+
+  .product-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+
+  .product-card:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .product-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .product-logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .product-info h3 {
+    font-size: 1.35rem;
+    margin-bottom: 4px;
+  }
+
+  .product-info .company {
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+
+  .product-body {
+    padding: 24px 28px;
+  }
+
+  .product-positioning {
+    background: #f8fafc;
+    border-left: 4px solid var(--primary);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+
+  .feature-list {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+
+  .feature-list li {
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+    font-size: 0.95rem;
+    color: var(--text);
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .feature-list li:last-child { border-bottom: none; }
+
+  .feature-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #10b981;
+    font-weight: 700;
+  }
+
+  .product-tag-list {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .product-tag {
+    padding: 4px 12px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+  }
+
+  /* Color schemes */
+  .tencent { background: linear-gradient(135deg, #0ea5e9, #0284c7); }
+  .bytedance { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+  .alibaba { background: linear-gradient(135deg, #f97316, #ea580c); }
+  .coze-bg { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+  /* Comparison Table */
+  .table-wrapper {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+  }
+
+  th {
+    background: #f8fafc;
+    padding: 16px 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text);
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  tr:hover td {
+    background: #f8fafc;
+  }
+
+  td:first-child {
+    font-weight: 600;
+    color: var(--text);
+    background: #fafbfc;
+  }
+
+  .score {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .score-high { background: #dcfce7; color: #166534; }
+  .score-mid { background: #fef3c7; color: #92400e; }
+
+  /* Decision Guide */
+  .decision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  .decision-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    transition: all 0.3s;
+  }
+
+  .decision-card:hover {
+    box-shadow: var(--shadow);
+    transform: translateX(4px);
+  }
+
+  .decision-scenario {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+
+  .decision-recommendation {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+  }
+
+  .decision-reason {
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  /* Chart Section */
+  .chart-container {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+
+  .chart-container h3 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+  }
+
+  .chart-container img {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  /* Notes */
+  .notes-section {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+  }
+
+  .notes-section h3 {
+    color: #92400e;
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+  }
+
+  .notes-section ol {
+    padding-left: 24px;
+    color: #78350f;
+  }
+
+  .notes-section li {
+    padding: 6px 0;
+    line-height: 1.7;
+  }
+
+  /* Conclusion */
+  .conclusion {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    text-align: center;
+  }
+
+  .conclusion h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .conclusion p {
+    font-size: 1.05rem;
+    opacity: 0.95;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.9;
+  }
+
+  /* Footer */
+  footer {
+    background: #1e293b;
+    color: var(--text-lighter);
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 1.8rem; }
+    .hero p { font-size: 1rem; }
+    .hero { padding: 60px 20px 80px; }
+    .section-title { font-size: 1.4rem; }
+    .container { padding: 40px 16px; }
+    .section { margin-bottom: 56px; }
+    .product-header, .product-body { padding: 20px; }
+    .conclusion { padding: 32px 24px; }
+    .summary-card, .notes-section { padding: 24px; }
+  }
+
+  /* Animation */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>AI开发平台对比分析报告</h1>
+    <p>深度解析 CodeBuddy · Coze · Trae · Qoder 四款产品的定位差异、核心能力与选型指南</p>
+    <div class="hero-tags">
+      <span class="hero-tag">CodeBuddy（腾讯云）</span>
+      <span class="hero-tag">Coze（字节跳动）</span>
+      <span class="hero-tag">Trae（字节跳动）</span>
+      <span class="hero-tag">Qoder（阿里云）</span>
+    </div>
+    <div class="hero-date">📅 2026年7月10日</div>
+  </div>
+</section>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#summary" class="active">报告摘要</a>
+    <a href="#category">品类划分</a>
+    <a href="#products">产品详解</a>
+    <a href="#comparison">横向对比</a>
+    <a href="#decision">选型建议</a>
+    <a href="#conclusion">总结</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Summary Section -->
+  <section id="summary" class="section fade-in">
+    <h2 class="section-title">报告摘要</h2>
+    <p class="section-subtitle">先厘清品类，再对比能力，避免跨赛道选型误区</p>
+
+    <div class="summary-card">
+      <h3>💡 核心发现</h3>
+      <p>
+        四款产品分属两个完全不同的品类，不能直接横向对比。CodeBuddy、Trae、Qoder 同属 <strong>AI编程工具/AI IDE</strong> 赛道（分别来自腾讯云、字节跳动、阿里云），核心目标是提升专业开发者的编码效率；而 <strong>Coze（扣子）属于AI智能体开发平台</strong> 赛道，面向非技术人员和业务团队，主打零代码构建AI应用和智能体协作。
+      </p>
+    </div>
+
+    <div class="category-grid">
+      <div class="category-card">
+        <div class="category-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">💻</div>
+        <h3>AI编程工具 / AI IDE</h3>
+        <p>面向专业开发者，提升编码效率，产出可运行的软件代码。</p>
+        <div class="category-products">
+          <span class="product-badge" style="background: #e0f2fe; color: #0369a1;">CodeBuddy</span>
+          <span class="product-badge" style="background: #e0e7ff; color: #3730a3;">Trae</span>
+          <span class="product-badge" style="background: #ffedd5; color: #9a3412;">Qoder</span>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">🤖</div>
+        <h3>AI智能体开发平台</h3>
+        <p>面向全员，零代码构建AI智能体，产出聊天机器人、自动化工作流。</p>
+        <div class="category-products">
+          <span class="product-badge" style="background: #ede9fe; color: #6d28d9;">Coze（扣子）</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Clarification -->
+  <section id="category" class="section fade-in">
+    <h2 class="section-title">品类划分</h2>
+    <p class="section-subtitle">四款产品分属两大品类，定位和目标用户截然不同</p>
+
+    <div class="product-grid" style="grid-template-columns: 1fr;">
+      <div class="product-card">
+        <div class="product-header">
+          <div class="product-logo tencent" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">💻</div>
+          <div class="product-info">
+            <h3>AI编程工具 / AI IDE</h3>
+            <div class="company">面向专业开发者 · 提升编码效率</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-positioning">
+            以代码为核心产出，帮助开发者更快、更好地编写软件。产品形态是 IDE 或编程插件，价值主张是"提升编码效率"。
+          </div>
+          <div class="product-tag-list">
+            <span class="product-tag">CodeBuddy（腾讯云）</span>
+            <span class="product-tag">Trae（字节跳动）</span>
+            <span class="product-tag">Qoder（阿里云）</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" style="margin-top: 24px;">
+        <div class="product-header">
+          <div class="product-logo coze-bg">🤖</div>
+          <div class="product-info">
+            <h3>AI智能体开发平台</h3>
+            <div class="company">面向全员 · 零代码构建AI应用</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-positioning">
+            以智能体为核心产出，让非技术人员也能搭建AI应用。产品形态是可视化工作台，价值主张是"降低AI使用门槛"。
+          </div>
+          <div class="product-tag-list">
+            <span class="product-tag">Coze（扣子）</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-container" style="margin-top: 40px;">
+      <h3>📊 四款产品品类定位图</h3>
+      <img src="https://www.coze.cn/s/fjUYAXQQBnY/" alt="四款AI产品品类定位与核心差异">
+    </div>
+  </section>
+
+  <!-- Products Detail -->
+  <section id="products" class="section fade-in">
+    <h2 class="section-title">产品详解</h2>
+    <p class="section-subtitle">四款产品的定位、核心功能与差异化优势</p>
+
+    <div class="product-grid" style="grid-template-columns: 1fr;">
+      <!-- CodeBuddy -->
+      <div class="product-card">
+        <div class="product-header">
+          <div class="product-logo tencent">C</div>
+          <div class="product-info">
+            <h3>CodeBuddy</h3>
+            <div class="company">腾讯云代码助手 · 腾讯混元 + DeepSeek 双模型</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-positioning">
+            全流程AI驱动的产研一体化编程平台，覆盖从产品构思到部署上线的完整链路。
+          </div>
+          <ul class="feature-list">
+            <li>支持 IDE、插件、CLI 三种形态，适配 15+ 主流开发环境</li>
+            <li>微信小程序/公众号/小游戏生态支持最好，生成准确率最高</li>
+            <li>与腾讯云部署链路打通，实现从代码到上线的一键闭环</li>
+            <li>提供等保三级合规、私有化部署、企业知识库等企业级能力</li>
+            <li>覆盖产品→设计→开发→部署全流程，不止是代码补全</li>
+          </ul>
+          <div class="product-tag-list">
+            <span class="product-tag">腾讯云生态</span>
+            <span class="product-tag">微信小程序</span>
+            <span class="product-tag">全流程一体化</span>
+            <span class="product-tag">企业级合规</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coze -->
+      <div class="product-card">
+        <div class="product-header">
+          <div class="product-logo coze-bg">C</div>
+          <div class="product-info">
+            <h3>Coze（扣子）</h3>
+            <div class="company">字节跳动 · AI智能体开发平台</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-positioning">
+            面向 Agent 时代的新一代 AI 团队协作平台，让人和 Agent 像真正的团队一样共同工作。
+          </div>
+          <ul class="feature-list">
+            <li>零代码搭建智能体，拖拽配置即可构建 AI 应用</li>
+            <li>四件套矩阵：Studio（开发）+ Loop（运维）+ Space（社区）+ 开源版</li>
+            <li>支持知识库 RAG、插件系统、工作流编排、多渠道发布</li>
+            <li>Coze 2.5 升级为 Agent 原生协作操作系统，推出 Agent World 生态</li>
+            <li>扣子编程（code.coze.cn）是其生态的一部分，非核心定位</li>
+          </ul>
+          <div class="product-tag-list">
+            <span class="product-tag">零代码</span>
+            <span class="product-tag">智能体</span>
+            <span class="product-tag">可视化编排</span>
+            <span class="product-tag">多渠道发布</span>
+            <span class="product-tag">开源</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trae -->
+      <div class="product-card">
+        <div class="product-header">
+          <div class="product-logo bytedance">T</div>
+          <div class="product-info">
+            <h3>Trae</h3>
+            <div class="company">字节跳动 · AI原生IDE · 国内首个AI原生开发环境</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-positioning">
+            AI 原生集成开发环境，定位为"真正的AI工程师"，推动开发从"人写代码"向"人定义问题、AI执行任务"转变。
+          </div>
+          <ul class="feature-list">
+            <li>双模式协作：IDE模式（人机协作）+ SOLO模式（AI主导）</li>
+            <li>SOLO 模式是三款产品中 Agent 化程度最高的，自主拆解→规划→编码→测试→调试</li>
+            <li>2026年6月升级为 TRAE Work，从纯编程向广义AI工作台扩展</li>
+            <li>国内版核心功能完全免费无限制，企业版 69 元/人/月起</li>
+            <li>中文体验最佳，支持看图写代码、Builder模式一键生成项目</li>
+          </ul>
+          <div class="product-tag-list">
+            <span class="product-tag">AI原生</span>
+            <span class="product-tag">SOLO模式</span>
+            <span class="product-tag">个人版免费</span>
+            <span class="product-tag">中文最优</span>
+            <span class="product-tag">性价比高</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Qoder -->
+      <div class="product-card">
+        <div class="product-header">
+          <div class="product-logo alibaba">Q</div>
+          <div class="product-info">
+            <h3>Qoder（原通义灵码）</h3>
+            <div class="company">阿里云 · Agentic 编码平台</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-positioning">
+            以深度项目理解和多智能体协作为核心特色的 Agentic 编码平台，面向真实软件开发场景设计。
+          </div>
+          <ul class="feature-list">
+            <li>核心技术理念：上下文工程（Context Engineering）</li>
+            <li>Repo Wiki 自动生成、项目级记忆、大规模代码检索，深度理解整个项目</li>
+            <li>Java/Go/Python 后端适配业界评价最高，代码工程规范</li>
+            <li>大型项目、遗留系统改造支持最好</li>
+            <li>多形态矩阵：IDE + 插件 + CLI + 桌面助理 + 云端Agent平台</li>
+          </ul>
+          <div class="product-tag-list">
+            <span class="product-tag">后端最强</span>
+            <span class="product-tag">深度理解</span>
+            <span class="product-tag">项目级上下文</span>
+            <span class="product-tag">大型项目</span>
+            <span class="product-tag">阿里云</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section id="comparison" class="section fade-in">
+    <h2 class="section-title">横向对比分析</h2>
+    <p class="section-subtitle">三款AI编程工具的多维度能力对比</p>
+
+    <div class="chart-container">
+      <h3>📊 核心能力雷达对比</h3>
+      <img src="https://www.coze.cn/s/gyYLPi0ik0Y/" alt="四款AI产品多维度能力对比">
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>对比维度</th>
+            <th>CodeBuddy（腾讯云）</th>
+            <th>Trae（字节跳动）</th>
+            <th>Qoder（阿里云）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>产品形态</td>
+            <td>IDE + 插件 + CLI</td>
+            <td>独立IDE + 插件</td>
+            <td>IDE + 插件 + CLI + 桌面助理</td>
+          </tr>
+          <tr>
+            <td>核心范式</td>
+            <td>全流程一体化 + 生态集成</td>
+            <td>AI原生 + 自动化主导</td>
+            <td>深度理解 + Agent协作</td>
+          </tr>
+          <tr>
+            <td>模型架构</td>
+            <td>腾讯混元 + DeepSeek 双模型</td>
+            <td>豆包 + DeepSeek（国内）<br>GPT-4o + Claude（国际）</td>
+            <td>通义千问 + 多模型切换</td>
+          </tr>
+          <tr>
+            <td>代码生成</td>
+            <td><span class="score score-mid">8.0/10</span> UI/前端出色</td>
+            <td><span class="score score-high">9.0/10</span> 全栈全面</td>
+            <td><span class="score score-high">8.5/10</span> 后端/Java最强</td>
+          </tr>
+          <tr>
+            <td>Agent能力</td>
+            <td><span class="score score-mid">7.0/10</span> Craft模式</td>
+            <td><span class="score score-high">9.2/10</span> SOLO模式成熟</td>
+            <td><span class="score score-high">8.5/10</span> Quest+Subagent</td>
+          </tr>
+          <tr>
+            <td>中文适配</td>
+            <td><span class="score score-high">8.5/10</span> 良好</td>
+            <td><span class="score score-high">9.5/10</span> 最优</td>
+            <td><span class="score score-mid">7.0/10</span> 偏弱</td>
+          </tr>
+          <tr>
+            <td>生态整合</td>
+            <td><span class="score score-high">9.5/10</span> 微信+腾讯云无敌</td>
+            <td><span class="score score-mid">6.5/10</span> 相对独立</td>
+            <td><span class="score score-mid">7.0/10</span> 阿里云生态</td>
+          </tr>
+          <tr>
+            <td>工程理解</td>
+            <td><span class="score score-high">8.0/10</span> 企业级规范</td>
+            <td><span class="score score-mid">7.5/10</span> 中小项目好</td>
+            <td><span class="score score-high">9.5/10</span> 大型项目最优</td>
+          </tr>
+          <tr>
+            <td>部署能力</td>
+            <td><span class="score score-high">9.0/10</span> 腾讯云一键部署</td>
+            <td><span class="score score-mid">7.0/10</span> 基础部署</td>
+            <td><span class="score score-mid">7.5/10</span> 通用部署</td>
+          </tr>
+          <tr>
+            <td>个人版价格</td>
+            <td>免费（公测期）</td>
+            <td><span class="score score-high">完全免费无限制</span></td>
+            <td>社区版免费 + 专业版¥99/月</td>
+          </tr>
+          <tr>
+            <td>企业版价格</td>
+            <td>¥198/人/月起</td>
+            <td>¥69/人/月起</td>
+            <td>¥199/人/月起</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chart-container" style="margin-top: 32px;">
+      <h3>📊 核心能力条形对比</h3>
+      <img src="https://www.coze.cn/s/fCbQx9_7vO0/" alt="三款AI编程工具核心能力对比">
+    </div>
+
+    <div class="summary-card" style="margin-top: 32px; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-color: #86efac;">
+      <h3 style="color: #166534;">🎯 技术路线一句话总结</h3>
+      <p style="color: #14532d;">
+        <strong>Trae</strong> 走"激进自动化"路线——效率最高、对非专业用户友好，但超大型工程稳定性不足；<br>
+        <strong>Qoder</strong> 走"深度理解"路线——大型代码库理解最深、代码风格一致，但生成速度和前端偏弱；<br>
+        <strong>CodeBuddy</strong> 走"生态整合"路线——全链路打通、腾讯生态内体验最顺，但通用性和中立性不如另两者。
+      </p>
+    </div>
+  </section>
+
+  <!-- Decision Guide -->
+  <section id="decision" class="section fade-in">
+    <h2 class="section-title">选型建议</h2>
+    <p class="section-subtitle">根据你的场景，快速找到最适合的工具</p>
+
+    <div class="decision-grid">
+      <div class="decision-card" style="border-left-color: #6366f1;">
+        <div class="decision-scenario">我是开发者，想找一款免费好用的AI编程助手</div>
+        <div class="decision-recommendation">Trae</div>
+        <div class="decision-reason">个人版全功能免费，中文体验最好，功能全面无短板</div>
+      </div>
+
+      <div class="decision-card" style="border-left-color: #0ea5e9;">
+        <div class="decision-scenario">我主要做微信小程序/公众号开发</div>
+        <div class="decision-recommendation">CodeBuddy</div>
+        <div class="decision-reason">微信生态深度集成，生成准确率最高</div>
+      </div>
+
+      <div class="decision-card" style="border-left-color: #f97316;">
+        <div class="decision-scenario">我做Java/Go后端，维护大型项目</div>
+        <div class="decision-recommendation">Qoder</div>
+        <div class="decision-reason">后端支持最强，项目级理解最深入</div>
+      </div>
+
+      <div class="decision-card" style="border-left-color: #8b5cf6;">
+        <div class="decision-scenario">我不是程序员，但想做一个自己的AI助手/机器人</div>
+        <div class="decision-recommendation">Coze（扣子）</div>
+        <div class="decision-reason">零代码搭建智能体，门槛最低，生态最全</div>
+      </div>
+
+      <div class="decision-card" style="border-left-color: #0ea5e9;">
+        <div class="decision-scenario">我们公司用腾讯云，重视数据合规</div>
+        <div class="decision-recommendation">CodeBuddy</div>
+        <div class="decision-reason">企业级安全合规最强，腾讯云一键部署</div>
+      </div>
+
+      <div class="decision-card" style="border-left-color: #8b5cf6;">
+        <div class="decision-scenario">我需要搭建企业级AI应用和工作流</div>
+        <div class="decision-recommendation">Coze 企业版</div>
+        <div class="decision-reason">完整的Agent开发、部署、运维、管理体系</div>
+      </div>
+    </div>
+
+    <div class="notes-section" style="margin-top: 40px;">
+      <h3>⚠️ 选型注意事项</h3>
+      <ol>
+        <li><strong>不要跨品类选型：</strong>需要"帮我写代码"就不要在 Coze 上浪费时间；需要"搭建智能客服 Bot"，三款编程工具都不是正确选择。</li>
+        <li><strong>免费策略可能变化：</strong>2026年5月 Qoder 已结束完全免费，Trae 目前仍坚持个人版免费，但行业整体在向商业化过渡。</li>
+        <li><strong>生态绑定的成本：</strong>深度集成某厂商生态能获得最佳体验，但也意味着更高的迁移成本，需权衡。</li>
+        <li><strong>先试再选：</strong>四款产品都提供免费试用，建议根据真实项目场景实际试用后再决定。</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Conclusion -->
+  <section id="conclusion" class="section fade-in">
+    <div class="conclusion">
+      <h2>📌 总结</h2>
+      <p>
+        <strong>Coze 是"造AI的平台"，CodeBuddy、Trae、Qoder 是"用AI写代码的工具"。</strong><br><br>
+        前者面向所有人，目标是降低AI应用的构建门槛；后者面向开发者，目标是提升软件开发的效率。<br><br>
+        三款 AI 编程工具中，Trae 以免费策略和极致自动化抢占个人开发者市场，CodeBuddy 依托腾讯生态做企业级全流程闭环，Qoder 则以深度代码理解和后端优势服务中大型团队。<br><br>
+        选型的关键不是比较功能清单，而是先想清楚：<strong>我是要做AI应用，还是要用AI写代码？如果是写代码，我最看重的是免费、生态、还是代码质量？</strong>
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>AI开发平台对比分析报告 · 2026年7月10日</p>
+  <p style="margin-top: 8px; font-size: 0.8rem;">数据来源于公开资料整理，仅供参考</p>
+</footer>
+
+<script>
+  // Scroll animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Active nav on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      if (window.scrollY >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+
+  // Smooth scroll
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
