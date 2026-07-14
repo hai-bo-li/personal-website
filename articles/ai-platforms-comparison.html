@@ -525,6 +525,143 @@
     .product-header, .product-body { padding: 20px; }
     td, th { padding: 10px 12px; font-size: 0.85rem; }
   }
+
+  /* Interaction Section */
+  .interaction-section {
+    max-width: 800px;
+    margin: 48px auto 0;
+    padding: 0 24px;
+  }
+
+  .like-section {
+    text-align: center;
+    padding: 32px 24px;
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+
+  .like-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 32px;
+    background: linear-gradient(135deg, #fff, #f1f5f9);
+    border: 2px solid #e2e8f0;
+    border-radius: 100px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .like-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.15);
+    border-color: #fca5a5;
+  }
+
+  .like-btn.liked {
+    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+    border-color: #f87171;
+    color: #dc2626;
+  }
+
+  .like-heart {
+    font-size: 1.4rem;
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .like-btn.liked .like-heart {
+    animation: heartPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes heartPop {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.5) rotate(-10deg); }
+    60% { transform: scale(0.9) rotate(5deg); }
+    100% { transform: scale(1) rotate(0); }
+  }
+
+  .like-count {
+    background: #f1f5f9;
+    padding: 2px 10px;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    min-width: 32px;
+    transition: background 0.3s;
+  }
+
+  .like-btn.liked .like-count {
+    background: #fecaca;
+  }
+
+  .like-hint {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: var(--text-lighter);
+    margin-bottom: 0;
+  }
+
+  /* 爱心飘出动画 */
+  .heart-particle {
+    position: absolute;
+    font-size: 1.2rem;
+    pointer-events: none;
+    animation: heartFloat 1s ease-out forwards;
+  }
+
+  @keyframes heartFloat {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-80px) scale(0.5); }
+  }
+
+  .comment-section {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+
+  .comment-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--text);
+  }
+
+  .comment-tip {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin: 0 0 20px;
+    line-height: 1.6;
+  }
+
+  .comment-tip a {
+    color: var(--primary-dark);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .comment-tip a:hover {
+    text-decoration: underline;
+  }
+
+  .giscus-container {
+    min-height: 100px;
+  }
+
+  @media (max-width: 640px) {
+    .interaction-section { padding: 0 16px; }
+    .like-section { padding: 24px 16px; }
+    .comment-section { padding: 20px; }
+  }
+
 </style>
 </head>
 <body>
@@ -874,6 +1011,93 @@
   document.querySelectorAll('.fade-in').forEach(el => {
     observer.observe(el);
   });
+</script>
+
+<script>
+
+// 点赞功能（基于 localStorage，每位访客独立记录）
+(function() {
+  const pageId = window.location.pathname;
+  const likedKey = 'liked_' + pageId;
+  const countKey = 'likeCount_' + pageId;
+  const btn = document.getElementById('likeBtn');
+  const countEl = document.getElementById('likeCount');
+  const isLiked = localStorage.getItem(likedKey) === '1';
+  let count = parseInt(localStorage.getItem(countKey) || '42', 10); // 基础点赞数展示
+  
+  function updateUI() {
+    countEl.textContent = count;
+    if (isLiked === false || localStorage.getItem(likedKey) === '1') {
+      btn.classList.add('liked');
+      btn.querySelector('.like-text').textContent = '已赞';
+    } else {
+      btn.classList.remove('liked');
+      btn.querySelector('.like-text').textContent = '点赞';
+    }
+  }
+  
+  window.toggleLike = function() {
+    const liked = localStorage.getItem(likedKey) === '1';
+    if (liked) {
+      localStorage.setItem(likedKey, '0');
+      count = Math.max(0, count - 1);
+      btn.classList.remove('liked');
+      btn.querySelector('.like-text').textContent = '点赞';
+    } else {
+      localStorage.setItem(likedKey, '1');
+      count += 1;
+      btn.classList.add('liked');
+      btn.querySelector('.like-text').textContent = '已赞';
+      // 飘心动画
+      for (let i = 0; i < 6; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('span');
+          heart.className = 'heart-particle';
+          heart.textContent = ['❤️','💖','💕','💗','💝','✨'][Math.floor(Math.random()*6)];
+          heart.style.left = (30 + Math.random()*40) + '%';
+          heart.style.top = '-10px';
+          btn.appendChild(heart);
+          setTimeout(() => heart.remove(), 1000);
+        }, i * 80);
+      }
+    }
+    localStorage.setItem(countKey, count);
+    countEl.textContent = count;
+  };
+  
+  updateUI();
+})();
+
+
+// Giscus 评论加载（需在 GitHub 仓库开启 Discussions 后生效）
+(function() {
+  // 你可以在 GitHub 仓库 Settings → 勾选 Discussions 开启
+  // 开启后访问 https://giscus.app 获取完整配置替换以下参数
+  const giscusContainer = document.querySelector('.giscus-container');
+  if (!giscusContainer) return;
+  
+  const script = document.createElement('script');
+  script.src = 'https://giscus.app/client.js';
+  script.setAttribute('data-repo', 'hai-bo-li/personal-website');
+  script.setAttribute('data-repo-id', 'R_kgDOTUln_Q');
+  script.setAttribute('data-category', 'Announcements');
+  script.setAttribute('data-category-id', '');
+  script.setAttribute('data-mapping', 'pathname');
+  script.setAttribute('data-strict', '0');
+  script.setAttribute('data-reactions-enabled', '1');
+  script.setAttribute('data-emit-metadata', '0');
+  script.setAttribute('data-input-position', 'bottom');
+  script.setAttribute('data-theme', 'light');
+  script.setAttribute('data-lang', 'zh-CN');
+  script.setAttribute('crossorigin', 'anonymous');
+  script.async = true;
+  // 加载 Giscus，如果未开启 Discussions 会自动显示错误信息，由 CSS 隐藏掉
+  script.onerror = function() {
+    giscusContainer.innerHTML = '<p style="color:var(--text-light);font-size:0.9rem;text-align:center;padding:20px;">评论功能正在初始化，请在 GitHub 开启 Discussions 后即可使用。</p>';
+  };
+  giscusContainer.appendChild(script);
+})();
+
 </script>
 
 </body>
