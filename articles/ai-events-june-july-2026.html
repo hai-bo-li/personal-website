@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30天AI圈大事件盘点 - 波叔叔</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary: #8b5cf6;
+  --accent: #06b6d4;
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --text: #1e293b;
+  --text-light: #64748b;
+  --text-lighter: #94a3b8;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1);
+  --radius: 12px;
+  --radius-lg: 20px;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.75;
+  font-size: 16px;
+}
+/* Nav */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+}
+.nav a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav a:hover { color: var(--text); }
+.logo {
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.1rem;
+}
+/* Article */
+.article-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 24px;
+}
+.article-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.article-tag {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary-dark);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.article-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+.article-meta {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+.article-cover {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  margin-bottom: 48px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  aspect-ratio: 2/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  font-weight: 700;
+  flex-direction: column;
+  gap: 12px;
+}
+.article-cover .cover-sub {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.9;
+}
+.article-content h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 48px 0 20px;
+  scroll-margin-top: 80px;
+}
+.article-content h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 32px 0 16px;
+}
+.article-content p {
+  margin-bottom: 20px;
+  color: #334155;
+}
+.article-content strong { color: var(--text); }
+.article-content ul, .article-content ol {
+  margin-bottom: 20px;
+  padding-left: 24px;
+}
+.article-content li {
+  margin-bottom: 8px;
+  color: #334155;
+}
+.callout {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-left: 4px solid #0ea5e9;
+  padding: 20px 24px;
+  border-radius: 0 12px 12px 0;
+  margin: 28px 0;
+}
+.callout h3 { color: #0369a1; margin-top: 0; margin-bottom: 10px; }
+.callout p { margin-bottom: 0; color: #0c4a6e; }
+.callout-warning {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-left-color: #f59e0b;
+}
+.callout-warning h3 { color: #92400e; }
+.callout-warning p { color: #78350f; }
+.callout-success {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-left-color: #10b981;
+}
+.callout-success h3 { color: #166534; }
+.callout-success p { color: #14532d; }
+/* Timeline */
+.timeline {
+  position: relative;
+  margin: 28px 0;
+  padding-left: 28px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary), var(--secondary));
+  border-radius: 2px;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 24px;
+}
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-dot {
+  position: absolute;
+  left: -28px;
+  top: 6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px var(--primary);
+}
+.timeline-date {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 4px;
+}
+.timeline-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.timeline-desc {
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+/* Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin: 28px 0;
+}
+.info-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+}
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.info-card .icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+.info-card h4 { font-size: 1.05rem; margin-bottom: 8px; }
+.info-card p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 0; }
+/* Product Cards */
+.product-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin: 28px 0;
+}
+.product-header {
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.product-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+.product-info h3 { font-size: 1.25rem; margin: 0 0 4px; }
+.product-info .company { color: var(--text-light); font-size: 0.85rem; }
+.product-body { padding: 24px 28px; }
+.product-positioning {
+  background: #f8fafc;
+  border-left: 4px solid var(--primary);
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+.feature-list { list-style: none; padding: 0; margin-bottom: 20px; }
+.feature-list li {
+  padding: 8px 0 8px 24px;
+  position: relative;
+  font-size: 0.95rem;
+  border-bottom: 1px dashed var(--border);
+  margin: 0;
+}
+.feature-list li:last-child { border-bottom: none; }
+.feature-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: 700;
+}
+.tag-list { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag {
+  padding: 4px 12px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+/* Color schemes */
+.openai { background: linear-gradient(135deg, #10b981, #059669); }
+.google { background: linear-gradient(135deg, #4285f4, #3367d6); }
+.deepseek { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+.meta { background: linear-gradient(135deg, #0ea5e9, #0284c7); }
+.alibaba { background: linear-gradient(135deg, #f97316, #ea580c); }
+.nvidia { background: linear-gradient(135deg, #84cc16, #65a30d); }
+.bytedance { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+.meituan { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.huawei { background: linear-gradient(135deg, #ef4444, #dc2626); }
+/* Table */
+.table-wrapper {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  overflow-x: auto;
+  margin: 28px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+th {
+  background: #f8fafc;
+  padding: 14px 18px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+td {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+td:first-child {
+  font-weight: 600;
+  background: #fafbfc;
+  width: 120px;
+}
+.score {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.score-high { background: #dcfce7; color: #166534; }
+.score-mid { background: #fef3c7; color: #92400e; }
+/* Stat highlights */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin: 28px 0;
+}
+.stat-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+/* Agent evolution */
+.evolution-row {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  margin: 28px 0;
+  flex-wrap: wrap;
+}
+.evolution-card {
+  flex: 1;
+  min-width: 180px;
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px;
+  border: 1px solid var(--border);
+  position: relative;
+}
+.evolution-stage {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.evolution-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.evolution-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+.evolution-example {
+  font-size: 0.85rem;
+  color: var(--text-lighter);
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+}
+.evolution-arrow {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+/* Conclusion */
+.conclusion {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  text-align: center;
+  margin: 48px 0;
+}
+.conclusion h2 { color: white; margin-top: 0; font-size: 1.5rem; }
+.conclusion p { font-size: 1.05rem; opacity: 0.95; margin-bottom: 0; color: white; }
+/* Download box */
+.download-box {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  border: 1px solid var(--border);
+  margin: 28px 0;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.download-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+.download-info { flex: 1; min-width: 200px; }
+.download-info h4 { font-size: 1.1rem; margin-bottom: 4px; }
+.download-info p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 0; }
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  text-decoration: none;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+/* Article footer */
+.article-footer {
+  margin-top: 60px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--primary-dark); }
+.share-tags { display: flex; gap: 8px; }
+/* Footer */
+footer {
+  background: #0f172a;
+  color: var(--text-lighter);
+  text-align: center;
+  padding: 32px 24px;
+  font-size: 0.9rem;
+  margin-top: 60px;
+}
+footer a { color: var(--text-lighter); text-decoration: none; }
+footer a:hover { color: white; }
+/* Fade in */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (max-width: 640px) {
+  .article-title { font-size: 1.75rem; }
+  .article-container { padding: 40px 16px; }
+  .conclusion { padding: 28px 20px; }
+  .product-header, .product-body { padding: 20px; }
+  td, th { padding: 10px 12px; font-size: 0.85rem; }
+  .evolution-row { flex-direction: column; }
+  .evolution-arrow { transform: rotate(90deg); justify-content: center; }
+  .stat-row { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">波叔叔</a>
+    <a href="../index.html">← 返回首页</a>
+  </div>
+</nav>
+
+<div class="article-container">
+  <div class="article-header fade-in">
+    <span class="article-tag">AI行业 · 月度盘点</span>
+    <h1 class="article-title">30天AI圈大事件盘点：从模型竞赛到智能体革命</h1>
+    <div class="article-meta">
+      <span>📅 2026年7月</span>
+      <span>⏱ 阅读约 12 分钟</span>
+    </div>
+  </div>
+
+  <div class="article-cover fade-in">
+    🤖 AI圈30天大事记
+    <div class="cover-sub">2026年6月-7月全球AI产业核心动态速递</div>
+  </div>
+
+  <div class="article-content">
+
+    <div class="callout fade-in">
+      <h3>💡 核心洞察</h3>
+      <p>2026年中是AI产业从"技术追逐"转向"价值落地"的关键拐点。大模型从单一垄断走向多强并立，智能体从概念走向实用，算力从依赖进口走向国产突破，具身智能从实验室走向量产。</p>
+    </div>
+
+    <h2 class="fade-in">一、全景速览：30天AI行业时间线</h2>
+    <p class="fade-in">过去一个月，AI行业大事不断。从微软Build到苹果WWDC，从GPT-5.6全量开放到DeepSeek 500亿融资，从国产算力突破到WAIC 2026，几乎每周都有重磅消息。</p>
+
+    <div class="timeline fade-in">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">6月上旬</div>
+        <div class="timeline-title">微软Build 2026大会</div>
+        <div class="timeline-desc">一口气发布7款自研AI模型 + Scout智能体，黄仁勋远程连线站台</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">6月中旬</div>
+        <div class="timeline-title">苹果WWDC 2026</div>
+        <div class="timeline-desc">全新Siri深度整合AI，端侧AI能力全面升级</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">6月17日</div>
+        <div class="timeline-title">DeepSeek 500亿融资</div>
+        <div class="timeline-desc">创AI领域史上最大单笔融资纪录，开源阵营强势崛起</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">6月底</div>
+        <div class="timeline-title">GPT-5.6全量开放</div>
+        <div class="timeline-desc">Sol/Terra/Luna三档模型全线发布，Atlas浏览器关停</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">7月初</div>
+        <div class="timeline-title">国产算力突破</div>
+        <div class="timeline-desc">深圳团队用昇腾训练1.6万亿参数模型，验证全栈国产训推可行性</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">7月中旬</div>
+        <div class="timeline-title">WAIC 2026上海</div>
+        <div class="timeline-desc">世界人工智能大会，华为Atlas 950真机首秀，人形机器人集中亮相</div>
+      </div>
+    </div>
+
+    <h2 class="fade-in">二、巨头争锋：GPT-5.6全线开放，竞争白热化</h2>
+    <p class="fade-in">大模型市场正从单一垄断走向多强并立。OpenAI、Google、Anthropic、SpaceX 各有杀手锏，价格战和能力竞赛同时上演。</p>
+
+    <div class="stat-row fade-in">
+      <div class="stat-card">
+        <div class="stat-number">3档</div>
+        <div class="stat-label">GPT-5.6系列模型</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">75%</div>
+        <div class="stat-label">Claude付费用户半年增长</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">80TPS</div>
+        <div class="stat-label">Grok 4.5速度</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">50%</div>
+        <div class="stat-label">价格下降趋势</div>
+      </div>
+    </div>
+
+    <div class="product-card fade-in">
+      <div class="product-header">
+        <div class="product-logo openai">G</div>
+        <div class="product-info">
+          <h3>GPT-5.6 系列</h3>
+          <div class="company">OpenAI · 三档矩阵全面开放</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-positioning">从旗舰到高量，覆盖不同场景需求</div>
+        <ul class="feature-list">
+          <li><strong>Sol 旗舰版</strong>：全新Ultra模式，协调4个AI子代理并行处理代码、网络安全与科研任务</li>
+          <li><strong>Terra 均衡版</strong>：性能媲美GPT-5.5，价格减半，输入2.5美元/百万Token</li>
+          <li><strong>Luna 高量版</strong>：低成本高并发，输入1美元/百万Token，适合基础场景</li>
+          <li>Atlas浏览器关停，智能浏览能力整合进ChatGPT桌面端与Chrome扩展</li>
+        </ul>
+        <div class="tag-list">
+          <span class="tag">Ultra模式</span>
+          <span class="tag">三档矩阵</span>
+          <span class="tag">价格下探</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-grid fade-in">
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #4285f4, #3367d6); color: white;">🔍</div>
+        <h4>Google Gemini 3.5 Flash</h4>
+        <p>集成Computer Use功能，OSWorld基准78.4分持平GPT-5.5</p>
+      </div>
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;">🧠</div>
+        <h4>Anthropic Claude</h4>
+        <p>付费用户半年增长75%，Fable 5灰度重上线，Mythos获美国政府审批</p>
+      </div>
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white;">🚀</div>
+        <h4>SpaceX Grok 4.5</h4>
+        <p>联手Cursor发布，号称Opus级别，Token成本仅一半，速度80TPS</p>
+      </div>
+    </div>
+
+    <div class="callout callout-success fade-in">
+      <h3>📌 趋势判断</h3>
+      <p>大模型市场从"一家独大"进入"多强并立"时代。能力差距在缩小，价格在快速下探，竞争焦点从"谁更强"转向"谁更实惠、谁更生态"。</p>
+    </div>
+
+    <h2 class="fade-in">三、资本狂潮：DeepSeek 500亿融资创历史纪录</h2>
+    <p class="fade-in">2026年6月17日，DeepSeek完成500亿元融资，创下AI领域史上最大单笔融资纪录。这笔融资不仅是一家公司的胜利，更是开源路线的强势证明。</p>
+
+    <div class="stat-row fade-in">
+      <div class="stat-card">
+        <div class="stat-number">500亿</div>
+        <div class="stat-label">DeepSeek融资金额（元）</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">6500万$</div>
+        <div class="stat-label">Ollama B轮融资</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">900万</div>
+        <div class="stat-label">Ollama月活开发者</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">-97.5%</div>
+        <div class="stat-label">腾讯云大模型降价</div>
+      </div>
+    </div>
+
+    <div class="product-card fade-in">
+      <div class="product-header">
+        <div class="product-logo deepseek">DS</div>
+        <div class="product-info">
+          <h3>DeepSeek 500亿融资</h3>
+          <div class="company">2026年6月17日 · AI史上最大单笔融资</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-positioning">资金将投入三个方向，构建长期竞争力</div>
+        <div class="card-grid" style="margin: 0;">
+          <div class="info-card" style="border: 1px solid var(--border); box-shadow: none;">
+            <div class="icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary-dark);">🧪</div>
+            <h4>技术研发</h4>
+            <p>扩大训练集群规模，支撑更大参数模型训练，推进下一代多模态模型</p>
+          </div>
+          <div class="info-card" style="border: 1px solid var(--border); box-shadow: none;">
+            <div class="icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary-dark);">🌐</div>
+            <h4>生态建设</h4>
+            <p>完善开源社区，开发者工具链升级，推理优化持续突破</p>
+          </div>
+          <div class="info-card" style="border: 1px solid var(--border); box-shadow: none;">
+            <div class="icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary-dark);">⚡</div>
+            <h4>算力基建</h4>
+            <p>建设自有算力基础设施，降低训练成本，保障长期供应</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="fade-in">同一时期，AI资本化全面加速：OpenAI秘密启动IPO筹备，Ollama完成6500万美元B轮融资（月活开发者逼近900万），腾讯云大模型降价97.5%，价格战进入白热化。</p>
+
+    <h2 class="fade-in">四、国产突围：大模型多点开花，全栈自主可控</h2>
+    <p class="fade-in">国产大模型正在从"可用"迈向"好用"。从美团LongCat到阿里通义千问，从字节豆包到智谱GLM，多点开花，各有侧重。</p>
+
+    <div class="product-card fade-in">
+      <div class="product-header">
+        <div class="product-logo meituan">LC</div>
+        <div class="product-info">
+          <h3>美团 LongCat-2.0</h3>
+          <div class="company">首个依托国产算力完成训推的万亿参数MoE模型</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <ul class="feature-list">
+          <li>总参数1.6万亿，单Token激活480亿</li>
+          <li>部署于超5万张国产算力卡集群</li>
+          <li>代码评测超越GPT-5.5</li>
+          <li>验证国产算力训练万亿级模型可行性</li>
+        </ul>
+        <div class="tag-list">
+          <span class="tag">全栈国产</span>
+          <span class="tag">万亿参数</span>
+          <span class="tag">代码能力强</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-grid fade-in">
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #f97316, #ea580c); color: white;">🌏</div>
+        <h4>通义千问 Qwen-AgentWorld</h4>
+        <p>全球首个原生语言世界模型LWM，AgentWorldBench评测全面超越GPT-5.4、Claude Opus 4.8</p>
+      </div>
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white;">💬</div>
+        <h4>字节豆包专业版</h4>
+        <p>国内首个完整AI付费订阅体系，68/200/500元三档，日均Token调用量突破180万亿，同比增长超10倍</p>
+      </div>
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">🧮</div>
+        <h4>智谱 GLM-5.2</h4>
+        <p>开源强化学习框架slime，数学推理、多轮工具调用多场景统一训练，每Token成本仅为竞品四分之一</p>
+      </div>
+    </div>
+
+    <h2 class="fade-in">五、开源盛世：四大模型谁是最强王者？</h2>
+    <p class="fade-in">开源模型的能力正在快速逼近闭源，开发者迎来最好的时代——免费可用的顶级模型越来越多。</p>
+
+    <div class="table-wrapper fade-in">
+      <table>
+        <thead>
+          <tr>
+            <th>模型</th>
+            <th>背后公司</th>
+            <th>核心优势</th>
+            <th>最新进展</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>DeepSeek V4</td>
+            <td>深度求索</td>
+            <td>推理能力极强，性价比极高</td>
+            <td>500亿融资加持，持续迭代</td>
+          </tr>
+          <tr>
+            <td>Qwen 3</td>
+            <td>阿里云</td>
+            <td>全家桶覆盖全面，中文能力突出</td>
+            <td>Qwen-AgentWorld发布，世界模型能力领先</td>
+          </tr>
+          <tr>
+            <td>Llama 4</td>
+            <td>Meta</td>
+            <td>生态成熟，社区活跃</td>
+            <td>企业版需求旺盛</td>
+          </tr>
+          <tr>
+            <td>Gemma 4</td>
+            <td>Google</td>
+            <td>轻量高效，边缘部署友好</td>
+            <td>端侧AI能力持续优化</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout fade-in">
+      <h3>🔍 开源竞争焦点</h3>
+      <p>四大开源模型的竞争正在四个维度展开：<strong>推理效率、多模态能力、上下文长度、本地部署</strong>。谁在这四个方面取得平衡，谁就能赢得开发者的心。</p>
+    </div>
+
+    <h2 class="fade-in">六、智能体革命：从对话工具到自主行动</h2>
+    <p class="fade-in">AI正在经历范式跃迁——从"你问我答"的对话式，转向"你说我做"的智能体式。这是继ChatGPT之后最重大的模式变革。</p>
+
+    <div class="evolution-row fade-in">
+      <div class="evolution-card">
+        <div class="evolution-stage">第一阶段</div>
+        <div class="evolution-name">Chatbot 对话式</div>
+        <div class="evolution-desc">问答交互，被动响应</div>
+        <div class="evolution-example">代表：早期ChatGPT</div>
+      </div>
+      <div class="evolution-arrow">→</div>
+      <div class="evolution-card">
+        <div class="evolution-stage">第二阶段</div>
+        <div class="evolution-name">Copilot 副驾驶</div>
+        <div class="evolution-desc">辅助执行，人机协作</div>
+        <div class="evolution-example">代表：GitHub Copilot、Microsoft Copilot</div>
+      </div>
+      <div class="evolution-arrow">→</div>
+      <div class="evolution-card">
+        <div class="evolution-stage">第三阶段</div>
+        <div class="evolution-name">Agent 智能体</div>
+        <div class="evolution-desc">自主规划，主动执行</div>
+        <div class="evolution-example">代表：Scout、GPT-5.6 Ultra模式</div>
+      </div>
+    </div>
+
+    <h3 class="fade-in">智能体典型代表</h3>
+    <div class="card-grid fade-in">
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">🤖</div>
+        <h4>微软 Scout 智能体</h4>
+        <p>自主执行多步骤任务，环境感知+工具调用，从对话工具迈向执行工具</p>
+      </div>
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white;">⚡</div>
+        <h4>OpenAI Ultra 模式</h4>
+        <p>GPT-5.6 Sol默认开启，协调4个AI子代理并行，代码、网安、科研多任务协同</p>
+      </div>
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #f97316, #ea580c); color: white;">💬</div>
+        <h4>微信原生 AI 助手"小微"</h4>
+        <p>收发消息、调用生成小程序，跨窗上下文复用，Agent级邮箱服务Agently Mail</p>
+      </div>
+    </div>
+
+    <h2 class="fade-in">七、算力底座：硬件突破与供应链争夺</h2>
+    <p class="fade-in">AI的竞争已经从模型能力延伸到供应链掌控力。没有算力，再好的算法也是空中楼阁。</p>
+
+    <div class="product-card fade-in">
+      <div class="product-header">
+        <div class="product-logo nvidia">N</div>
+        <div class="product-info">
+          <h3>英伟达全栈布局</h3>
+          <div class="company">从GPU芯片公司向"AI算力全栈供应商"转型</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <ul class="feature-list">
+          <li>与SK海力士建立多年期战略合作，锁定HBM供给</li>
+          <li>Spectrum-X以太网硅光技术全面量产，能效提升5倍</li>
+          <li>GR00T具身智能框架发布，AI Agent自主做机器人研究</li>
+          <li>从芯片到网络到框架，构建全栈竞争力</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-success fade-in">
+      <h3>🇨🇳 国产算力里程碑</h3>
+      <p><strong>深圳团队用1000颗昇腾910C芯片，完成1.6万亿参数大模型稳定训练超1500步</strong>。这验证了国产芯片集群训练万亿级模型的可行性，是中国AI产业"去风险化"的重要一步。</p>
+    </div>
+
+    <div class="product-card fade-in">
+      <div class="product-header">
+        <div class="product-logo huawei">950</div>
+        <div class="product-info">
+          <h3>华为 Atlas 950</h3>
+          <div class="company">WAIC 2026真机首秀 · 业界顶级商用超节点</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <ul class="feature-list">
+          <li>单柜64卡起步，最大可搭载8192张NPU卡</li>
+          <li>专为万亿级参数大模型训练打造</li>
+          <li>WAIC 2026首次公开真机展示</li>
+          <li>国产算力高端市场的核心玩家</li>
+        </ul>
+        <div class="tag-list">
+          <span class="tag">国产算力</span>
+          <span class="tag">万亿参数</span>
+          <span class="tag">WAIC首秀</span>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="fade-in">八、具身元年：人形机器人从实验室走向量产</h2>
+    <p class="fade-in">AI的下一个主战场——物理世界。2026年被称为"具身智能元年"，人形机器人正加速从实验室走向真实场景。</p>
+
+    <div class="stat-row fade-in">
+      <div class="stat-card">
+        <div class="stat-number">10万台</div>
+        <div class="stat-label">2026年国内人形机器人产量预期</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">12自由度</div>
+        <div class="stat-label">AI灵巧手超高精度设计</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">10万㎡</div>
+        <div class="stat-label">WAIC 2026展览面积</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">300+款</div>
+        <div class="stat-label">全球新品首发</div>
+      </div>
+    </div>
+
+    <div class="card-grid fade-in">
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white;">🏭</div>
+        <h4>量产提速</h4>
+        <p>工信部确认2026年国内人形机器人整机产量有望突破10万台，多款新一代量产方案公开</p>
+      </div>
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;">🦾</div>
+        <h4>核心零部件突破</h4>
+        <p>AI灵巧手Pro 12自由度超高精度设计，可完成医疗手术、精密制造等精细化操作</p>
+      </div>
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white;">📱</div>
+        <h4>AI智能体手机</h4>
+        <p>全球首款AI智能体手机即将首发，终端智能体成为新赛道</p>
+      </div>
+    </div>
+
+    <div class="callout fade-in">
+      <h3>🎯 WAIC 2026 前瞻</h3>
+      <p>7月17-20日上海"三地四馆"举办，主题<strong>"智能伙伴共创未来"</strong>。人形机器人、终端智能体集中秀场，展览面积首破10万平米，300+款全球新品首发。</p>
+    </div>
+
+    <h2 class="fade-in">九、趋势洞察：三大关键词读懂AI走向</h2>
+    <p class="fade-in">站在2026年中这个时间点，AI产业正在发生三个根本性的转向。</p>
+
+    <div class="card-grid fade-in">
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #f97316, #ea580c); color: white;">🌍</div>
+        <h4>关键词一：从线上到线下</h4>
+        <p>世界经济论坛《2026十大新兴技术》指出8项已从"软件优先的AI"转向"物理具身智能"。AI驱动科学发现、下一代人机交互上榜。阿里达摩院AI发现4种全新超导材料并获实验验证。</p>
+      </div>
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">🔀</div>
+        <h4>关键词二：从垄断到多元</h4>
+        <p>ChatGPT全球市场份额首次跌破50%。微软构建"OpenAI合作+自研补充"双轨策略。国产大模型百花齐放，开源生态蓬勃发展，开发者选择越来越丰富。</p>
+      </div>
+      <div class="info-card">
+        <div class="icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white;">💡</div>
+        <h4>关键词三：从技术到落地</h4>
+        <p>政策密集出台推动AI赋能千行百业。大模型价格战持续，应用门槛快速降低。垂直行业专用模型涌现，医疗、金融、制造深度渗透。价值落地成为主旋律。</p>
+      </div>
+    </div>
+
+    <div class="conclusion fade-in">
+      <h2>📌 总结</h2>
+      <p>2026年中，AI产业正处在从"技术追逐"转向"价值落地"的关键拐点。</p>
+      <p style="margin-top: 16px;">模型能力在趋同，竞争在向生态、价格、落地场景转移；<br>智能体从概念走向实用，AI开始真正"做事"而不只是"说话"；<br>国产算力和大模型快速崛起，全栈自主可控不再是口号；<br>具身智能元年开启，AI正在从数字世界走向物理世界。</p>
+    </div>
+
+    <!-- PPT下载 -->
+    <div class="download-box fade-in">
+      <div class="download-icon">📊</div>
+      <div class="download-info">
+        <h4>下载完整 PPT</h4>
+        <p>30天AI圈大事件盘点 · 完整演示文稿</p>
+      </div>
+      <a href="../files/2026年6月-7月_30天AI圈大事件盘点.pptx" class="download-btn" download>
+        下载 PPT ↓
+      </a>
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <a href="../index.html" class="back-link">← 返回首页</a>
+    <div class="share-tags">
+      <span class="tag">AI行业</span>
+      <span class="tag">月度盘点</span>
+      <span class="tag">大模型</span>
+      <span class="tag">智能体</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="../index.html">← 返回首页</a>
+  <p style="margin-top: 8px;">© 2026 波叔叔 · 内容仅供参考</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => {
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
