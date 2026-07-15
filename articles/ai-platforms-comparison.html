@@ -652,46 +652,52 @@
     text-decoration: underline;
   }
 
-  .giscus-container {
-    min-height: 100px;
+  .comment-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    flex-wrap: wrap;
   }
 
-  .giscus-loading {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text-light);
-  }
-
-  .giscus-loading p {
-    margin: 8px 0;
+  .comment-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-radius: 10px;
     font-size: 0.95rem;
-  }
-
-  .giscus-loading .loading-tip {
-    font-size: 0.85rem;
-    color: var(--text-light);
-    opacity: 0.85;
-  }
-
-  .giscus-loading .loading-tip a {
-    color: var(--primary-dark);
-    text-decoration: none;
     font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
   }
 
-  .loading-spinner {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    border: 3px solid var(--border);
-    border-top-color: var(--primary, #6366f1);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin-bottom: 12px;
+  .comment-btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white !important;
   }
 
-  @keyframes spin {
-    to { transform: rotate(360deg); }
+  .comment-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+  }
+
+  .comment-btn-secondary {
+    background: white;
+    color: var(--primary-dark) !important;
+    border: 1px solid var(--border);
+  }
+
+  .comment-btn-secondary:hover {
+    background: var(--primary-light, #f5f3ff);
+    border-color: var(--primary-dark, #6366f1);
+  }
+
+  @media (max-width: 480px) {
+    .comment-btn {
+      flex: 1;
+      justify-content: center;
+      min-width: 0;
+    }
   }
 
   @media (max-width: 640px) {
@@ -1045,10 +1051,24 @@
   <!-- 评论区域 -->
   <div class="comment-section">
     <h3 class="comment-title">💬 评论交流</h3>
-    <p class="comment-tip">使用 GitHub 账号登录后即可发表评论，欢迎交流想法！</p>
-    <div class="giscus-container" id="giscusContainer">
-      <div class="giscus-loading" id="giscusLoading">
-        <div class="loading-spinner"></div>
+    <p class="comment-tip">欢迎在 GitHub Issues 留下你的想法、问题或建议。我会尽快回复！</p>
+    <div class="comment-actions">
+      <a href="https://github.com/hai-bo-li/personal-website/issues/new?labels=comment&title=[四款AI开发平台对比分析] 评论" target="_blank" rel="noopener" class="comment-btn comment-btn-primary">
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: middle; margin-right: 6px;">
+          <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 0z"></path>
+          <path d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"></path>
+        </svg>
+        在 GitHub Issues 发表评论
+      </a>
+      <a href="https://github.com/hai-bo-li/personal-website/issues?q=is%3Aissue+label%3Acomment" target="_blank" rel="noopener" class="comment-btn comment-btn-secondary">
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: middle; margin-right: 6px;">
+          <path d="M1.75 2.5a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25H1.75zM0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0114.25 15H1.75A1.75 1.75 0 010 13.25V2.75z"></path>
+          <path d="M6.5 6.5a.5.5 0 00-1 0v3.5h-3.5a.5.5 0 000 1h3.5v3.5a.5.5 0 001 0v-3.5h3.5a.5.5 0 000-1h-3.5v-3.5z"></path>
+        </svg>
+        查看所有评论
+      </a>
+    </div>
+  </div>
         <p>正在加载评论区…</p>
         <p class="loading-tip">首次加载需要访问 GitHub，若长时间未显示请<a href="https://github.com/hai-bo-li/personal-website/discussions" target="_blank">点击这里</a>在 GitHub Discussions 中评论</p>
       </div>
@@ -1130,34 +1150,9 @@
 })();
 
 
-// Giscus 评论加载（需在 GitHub 仓库开启 Discussions 后生效）
-(function() {
-  // 你可以在 GitHub 仓库 Settings → 勾选 Discussions 开启
-  // 开启后访问 https://giscus.app 获取完整配置替换以下参数
-  const giscusContainer = document.querySelector('.giscus-container');
-  if (!giscusContainer) return;
-  
-  const script = document.createElement('script');
-  script.src = 'https://giscus.app/client.js';
-  script.setAttribute('data-repo', 'hai-bo-li/personal-website');
-  script.setAttribute('data-repo-id', 'R_kgDOTUln_Q');
-  script.setAttribute('data-category', 'General');
-  script.setAttribute('data-category-id', 'DIC_kwDOTUln_c4DBMH7');
-  script.setAttribute('data-mapping', 'pathname');
-  script.setAttribute('data-strict', '0');
-  script.setAttribute('data-reactions-enabled', '1');
-  script.setAttribute('data-emit-metadata', '0');
-  script.setAttribute('data-input-position', 'bottom');
-  script.setAttribute('data-theme', 'light');
-  script.setAttribute('data-lang', 'zh-CN');
-  script.setAttribute('crossorigin', 'anonymous');
-  script.async = true;
-  // 加载 Giscus，如果未开启 Discussions 会自动显示错误信息，由 CSS 隐藏掉
-  script.onerror = function() {
-    giscusContainer.innerHTML = '<p style="color:var(--text-light);font-size:0.9rem;text-align:center;padding:20px;">加载评论区中，如未显示请检查网络或刷新页面。</p>';
-  };
-  giscusContainer.appendChild(script);
-})();
+// 评论功能已改为 GitHub Issues 方案，详见评论区按钮
+// 用户点击按钮后跳转到 https://github.com/hai-bo-li/personal-website/issues/new 发评论
+(function() { /* Giscus 已停用 */ })();
 
 </script>
 
