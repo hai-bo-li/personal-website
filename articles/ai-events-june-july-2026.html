@@ -739,7 +739,7 @@ footer a:hover { color: white; }
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-date">6月底</div>
+        <div class="timeline-date">7月9日</div>
         <div class="timeline-title">GPT-5.6全量开放</div>
         <div class="timeline-desc">Sol/Terra/Luna三档模型全线发布，Atlas浏览器关停</div>
       </div>
@@ -1166,7 +1166,7 @@ footer a:hover { color: white; }
   <div class="like-section">
     <button class="like-btn" id="likeBtn" onclick="toggleLike()">
       <span class="like-heart">❤️</span>
-      <span class="like-count" id="likeCount">42</span>
+      <span class="like-count" id="likeCount">0</span>
       <span class="like-text">点赞</span>
     </button>
     <p class="like-hint">点个赞鼓励一下吧 ✨</p>
@@ -1208,7 +1208,7 @@ document.querySelectorAll('.fade-in').forEach(el => {
   const btn = document.getElementById('likeBtn');
   const countEl = document.getElementById('likeCount');
   const isLiked = localStorage.getItem(likedKey) === '1';
-  let count = parseInt(localStorage.getItem(countKey) || '42', 10); // 基础点赞数展示
+  let count = parseInt(localStorage.getItem(countKey) || '0', 10); // 基础点赞数展示
   
   function updateUI() {
     countEl.textContent = count;
