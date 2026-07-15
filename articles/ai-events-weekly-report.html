@@ -327,15 +327,40 @@ body {
 }
 
 /* ========== 子板块标题 ========== */
-.sub-section { margin-bottom: 48px; }
+.sub-section { margin-bottom: 56px; }
 .sub-section-title {
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   padding-left: 16px;
   border-left: 4px solid var(--primary);
   line-height: 1.4;
+}
+
+/* ========== 子板块封面图 ========== */
+.sub-section-hero {
+  position: relative;
+  margin-bottom: 32px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.12);
+  aspect-ratio: 16 / 6;
+  max-height: 240px;
+}
+.sub-section-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.sub-section-hero:hover img { transform: scale(1.03); }
+.sub-section-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.10) 50%, rgba(6, 182, 212, 0.15) 100%);
+  pointer-events: none;
 }
 
 /* ========== 时间线 ========== */
@@ -771,6 +796,10 @@ footer p { margin-top: 8px; line-height: 1.7; }
     <!-- 子板块 1：模型与产品 -->
     <div class="sub-section fade-in">
       <h3 class="sub-section-title">1. 模型与产品：多智能体时代正式开启</h3>
+      <div class="sub-section-hero">
+        <img src="../images/weekly_section_01_models.png" alt="1. 模型与产品" loading="lazy">
+        <div class="sub-section-hero-overlay"></div>
+      </div>
       <div class="timeline">
         <div class="timeline-item">
           <div class="event-card">
@@ -808,6 +837,10 @@ footer p { margin-top: 8px; line-height: 1.7; }
     <!-- 子板块 2：公司动态 -->
     <div class="sub-section fade-in">
       <h3 class="sub-section-title">2. 公司动态：诉讼、融资与组织变局</h3>
+      <div class="sub-section-hero">
+        <img src="../images/weekly_section_02_companies.png" alt="2. 公司动态" loading="lazy">
+        <div class="sub-section-hero-overlay"></div>
+      </div>
       <div class="timeline">
         <div class="timeline-item">
           <div class="event-card">
@@ -848,6 +881,10 @@ footer p { margin-top: 8px; line-height: 1.7; }
     <!-- 子板块 3：政策与监管 -->
     <div class="sub-section fade-in">
       <h3 class="sub-section-title">3. 政策与监管：全球分化加速，硬约束时代来临</h3>
+      <div class="sub-section-hero">
+        <img src="../images/weekly_section_03_policy.png" alt="3. 政策与监管" loading="lazy">
+        <div class="sub-section-hero-overlay"></div>
+      </div>
       <div class="timeline">
         <div class="timeline-item">
           <div class="event-card">
@@ -879,6 +916,10 @@ footer p { margin-top: 8px; line-height: 1.7; }
     <!-- 子板块 4：技术突破与产业落地 -->
     <div class="sub-section fade-in">
       <h3 class="sub-section-title">4. 技术突破与产业落地</h3>
+      <div class="sub-section-hero">
+        <img src="../images/weekly_section_04_tech.png" alt="4. 技术突破" loading="lazy">
+        <div class="sub-section-hero-overlay"></div>
+      </div>
       <div class="timeline">
         <div class="timeline-item">
           <div class="event-card">
@@ -910,6 +951,10 @@ footer p { margin-top: 8px; line-height: 1.7; }
     <!-- 子板块 5：争议与安全事件 -->
     <div class="sub-section fade-in">
       <h3 class="sub-section-title">5. 争议与安全事件</h3>
+      <div class="sub-section-hero">
+        <img src="../images/weekly_section_05_safety.png" alt="5. 争议与安全" loading="lazy">
+        <div class="sub-section-hero-overlay"></div>
+      </div>
       <div class="timeline">
         <div class="timeline-item">
           <div class="event-card">
@@ -938,6 +983,10 @@ footer p { margin-top: 8px; line-height: 1.7; }
     <!-- 子板块 6：行业会议与峰会 -->
     <div class="sub-section fade-in">
       <h3 class="sub-section-title">6. 行业会议与峰会</h3>
+      <div class="sub-section-hero">
+        <img src="../images/weekly_section_06_conferences.png" alt="6. 行业会议" loading="lazy">
+        <div class="sub-section-hero-overlay"></div>
+      </div>
       <div class="event-card">
         <h4>6.1 2026世界人工智能大会（WAIC）—7月17-20日，上海</h4>
         <p><strong>看点：习近平主席出席并发表主旨演讲，300+产品全球首发</strong></p>
@@ -996,6 +1045,10 @@ footer p { margin-top: 8px; line-height: 1.7; }
     <!-- 子板块 7：产品与技术发布日程 -->
     <div class="sub-section fade-in">
       <h3 class="sub-section-title">7. 产品与技术发布日程</h3>
+      <div class="sub-section-hero">
+        <img src="../images/weekly_section_07_upcoming.png" alt="7. 产品与技术发布" loading="lazy">
+        <div class="sub-section-hero-overlay"></div>
+      </div>
       <div class="event-card">
         <h4>7.1 Meta AI芯片"Iris"9月投产</h4>
         <p>Meta的数据中心AI芯片代号"Iris"预计2026年9月正式投入生产。作为MTIA（Meta Training and Inference Accelerators）四代自研芯片项目的一部分，Iris的投产将标志着Meta在AI算力自主化道路上迈出重要一步。Meta的目标是通过定制芯片将AI计算能力翻倍，减少对英伟达等外部供应商的依赖<a href="https://widgets.economictimes.com/topic/meta-vs-openai-google-ai">(Economic Times)</a>。</p>
@@ -1015,6 +1068,10 @@ footer p { margin-top: 8px; line-height: 1.7; }
     <!-- 子板块 8：政策与监管关键节点 -->
     <div class="sub-section fade-in">
       <h3 class="sub-section-title">8. 政策与监管关键节点</h3>
+      <div class="sub-section-hero">
+        <img src="../images/weekly_section_08_regulation.png" alt="8. 政策与监管关键" loading="lazy">
+        <div class="sub-section-hero-overlay"></div>
+      </div>
       <div class="event-card">
         <h4>8.1 EU AI Act透明度规则8月2日生效</h4>
         <p>2026年8月2日，欧盟AI法案第50条规定的透明度义务将正式可强制执行。核心内容包括：当用户与AI系统交互时必须披露、合成内容必须带有机器可读标记、深度伪造内容必须标注。违反者面临最高可达全球年营业额6%的罚款<a href="https://sharedsapience.com/century-report/the-century-report-july-13-2026/">(Shared Sapience)</a>。</p>
@@ -1029,6 +1086,10 @@ footer p { margin-top: 8px; line-height: 1.7; }
     <!-- 子板块 9：财报季 -->
     <div class="sub-section fade-in">
       <h3 class="sub-section-title">9. 财报季：AI资本开支的试金石</h3>
+      <div class="sub-section-hero">
+        <img src="../images/weekly_section_09_earnings.png" alt="9. 财报季" loading="lazy">
+        <div class="sub-section-hero-overlay"></div>
+      </div>
       <p>2026年7月中旬至7月底，美股科技巨头将密集发布Q2财报，这可能是决定下半年AI产业投资情绪的最重要事件。核心看点不在于单季利润是否超预期，而在于管理层对AI资本开支的<strong>前瞻指引</strong>——市场已经充分交易了AI需求叙事，接下来需要验证的是需求的可持续性<a href="https://example.com">(浙商证券)</a>。</p>
       <p>关键财报日程：</p>
       <div class="table-wrapper">
