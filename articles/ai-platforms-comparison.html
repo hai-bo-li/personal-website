@@ -998,7 +998,7 @@
   <div class="like-section">
     <button class="like-btn" id="likeBtn" onclick="toggleLike()">
       <span class="like-heart">❤️</span>
-      <span class="like-count" id="likeCount">42</span>
+      <span class="like-count" id="likeCount">0</span>
       <span class="like-text">点赞</span>
     </button>
     <p class="like-hint">点个赞鼓励一下吧 ✨</p>
@@ -1040,7 +1040,7 @@
   const btn = document.getElementById('likeBtn');
   const countEl = document.getElementById('likeCount');
   const isLiked = localStorage.getItem(likedKey) === '1';
-  let count = parseInt(localStorage.getItem(countKey) || '42', 10); // 基础点赞数展示
+  let count = parseInt(localStorage.getItem(countKey) || '0', 10); // 基础点赞数展示
   
   function updateUI() {
     countEl.textContent = count;
