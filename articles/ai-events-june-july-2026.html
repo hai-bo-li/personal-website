@@ -1188,19 +1188,16 @@ document.querySelectorAll('.fade-in').forEach(el => {
 
 <script>
 
-// 点赞功能（基于 localStorage，每位访客独立记录）
+// 点赞功能（基于公共计数 API，所有访客看到一致的真实点赞数）
 (function() {
-  const pageId = window.location.pathname;
-  const likedKey = 'liked_' + pageId;
-  const countKey = 'likeCount_' + pageId;
+  const COUNTER_KEY = 'boshushu-ai-events-likes';
+  const LOCAL_KEY = 'boshushu_liked_ai_events';
+  const API_BASE = 'https://countapi.mileshilliard.com/api/v1';
   const btn = document.getElementById('likeBtn');
   const countEl = document.getElementById('likeCount');
-  const isLiked = localStorage.getItem(likedKey) === '1';
-  let count = parseInt(localStorage.getItem(countKey) || '0', 10); // 基础点赞数展示
-  
-  function updateUI() {
-    countEl.textContent = count;
-    if (isLiked === false || localStorage.getItem(likedKey) === '1') {
+
+  function setLikedUI(liked) {
+    if (liked) {
       btn.classList.add('liked');
       btn.querySelector('.like-text').textContent = '已赞';
     } else {
@@ -1208,38 +1205,47 @@ document.querySelectorAll('.fade-in').forEach(el => {
       btn.querySelector('.like-text').textContent = '点赞';
     }
   }
-  
-  window.toggleLike = function() {
-    const liked = localStorage.getItem(likedKey) === '1';
-    if (liked) {
-      localStorage.setItem(likedKey, '0');
-      count = Math.max(0, count - 1);
-      btn.classList.remove('liked');
-      btn.querySelector('.like-text').textContent = '点赞';
-    } else {
-      localStorage.setItem(likedKey, '1');
-      count += 1;
-      btn.classList.add('liked');
-      btn.querySelector('.like-text').textContent = '已赞';
-      // 飘心动画
-      for (let i = 0; i < 6; i++) {
-        setTimeout(() => {
-          const heart = document.createElement('span');
-          heart.className = 'heart-particle';
-          heart.textContent = ['❤️','💖','💕','💗','💝','✨'][Math.floor(Math.random()*6)];
-          heart.style.left = (30 + Math.random()*40) + '%';
-          heart.style.top = '-10px';
-          btn.appendChild(heart);
-          setTimeout(() => heart.remove(), 1000);
-        }, i * 80);
-      }
+
+  function spawnHearts() {
+    for (let i = 0; i < 6; i++) {
+      setTimeout(() => {
+        const heart = document.createElement('span');
+        heart.className = 'heart-particle';
+        heart.textContent = ['❤️','💖','💕','💗','💝','✨'][Math.floor(Math.random()*6)];
+        heart.style.left = (30 + Math.random()*40) + '%';
+        heart.style.top = '-10px';
+        btn.appendChild(heart);
+        setTimeout(() => heart.remove(), 1000);
+      }, i * 80);
     }
-    localStorage.setItem(countKey, count);
-    countEl.textContent = count;
+  }
+
+  // 拉取公共点赞数
+  fetch(`${API_BASE}/get/${COUNTER_KEY}`)
+    .then(r => r.json())
+    .then(data => {
+      if (data && typeof data.value === 'number') countEl.textContent = data.value;
+      else countEl.textContent = '0';
+    })
+    .catch(() => { countEl.textContent = '0'; });
+
+  // 本地是否已点
+  setLikedUI(localStorage.getItem(LOCAL_KEY) === '1');
+
+  window.toggleLike = function() {
+    if (localStorage.getItem(LOCAL_KEY) === '1') return;
+    fetch(`${API_BASE}/hit/${COUNTER_KEY}`)
+      .then(r => r.json())
+      .then(data => {
+        if (data && typeof data.value === 'number') countEl.textContent = data.value;
+        localStorage.setItem(LOCAL_KEY, '1');
+        setLikedUI(true);
+        spawnHearts();
+      })
+      .catch(() => { alert('点赞失败，请稍后再试'); });
   };
-  
-  updateUI();
 })();
+
 
 
 // Giscus 评论加载（需在 GitHub 仓库开启 Discussions 后生效）
