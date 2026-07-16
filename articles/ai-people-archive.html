@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI 圈大人物档案 - 波叔叔的 AI 观察</title>
-  <meta name="description" content="让叔叔一眼认识 AI 圈都在听谁说话。一手消息源按优先级排序，配合「AI 圈实时雷达」使用。">
+  <meta name="description" content="认识 AI 圈最值得关注的人、公司和媒体。一手消息源按重要性排序，帮你快速找到该跟谁。">
   <style>
 :root {
   --primary: #6366f1;
@@ -127,6 +127,14 @@ a { text-decoration: none; color: inherit; }
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: white; border-color: transparent;
   transform: translateY(-1px);
+}
+.quick-nav a.sub-link {
+  padding: 6px 12px; font-size: 0.82rem; color: var(--text-light);
+  background: transparent; border: 1px dashed var(--border);
+}
+.quick-nav a.sub-link:hover {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white; border-style: solid;
 }
 
 /* ===== Section ===== */
@@ -319,12 +327,12 @@ footer .footer-bottom { color: var(--text-lighter); font-size: 0.85rem; }
     <div class="hero-inner">
       <span class="hero-badge">持续更新</span>
       <h1>AI 圈大人物档案</h1>
-      <p class="hero-subtitle">让叔叔一眼认识 AI 圈都在"听谁说话"。这些人/公司发的帖都是一手消息源，按优先级排序。配合「AI 圈实时雷达」使用 —— 雷达默认盯一区，叔叔想加谁直接说。</p>
+      <p class="hero-subtitle">认识 AI 圈最值得"听谁说话"——他们发的帖、写的论文、发的产品都是一手消息。按重要性分四区，帮你快速找到该跟谁。</p>
       <div class="hero-stats">
-        <div class="hero-stat"><strong>28</strong><span>必盯大人物</span></div>
+        <div class="hero-stat"><strong>22</strong><span>核心人物</span></div>
         <div class="hero-stat"><strong>19</strong><span>AI 公司号</span></div>
         <div class="hero-stat"><strong>13</strong><span>行业媒体</span></div>
-        <div class="hero-stat"><strong>17</strong><span>补充人物</span></div>
+        <div class="hero-stat"><strong>12</strong><span>补充人物</span></div>
       </div>
     </div>
   </section>
@@ -332,8 +340,11 @@ footer .footer-bottom { color: var(--text-lighter); font-size: 0.85rem; }
   <!-- 快速导航 -->
   <nav class="quick-nav">
     <div class="quick-nav-inner">
-      <a href="#zone-1">一区 · 必盯大人物</a>
-      <a href="#zone-2">二区 · 必盯公司</a>
+      <a href="#zone-1">一区 · 必盯人物</a>
+      <a href="#sub-a" class="sub-link">A. 海外 CEO</a>
+      <a href="#sub-b" class="sub-link">B. 学院派</a>
+      <a href="#sub-c" class="sub-link">C. 国内 CEO</a>
+      <a href="#zone-2">二区 · AI 公司</a>
       <a href="#zone-3">三区 · 行业媒体</a>
       <a href="#zone-4">四区 · 补充人物</a>
     </div>
@@ -344,10 +355,10 @@ footer .footer-bottom { color: var(--text-lighter); font-size: 0.85rem; }
     <div class="zone-header">
       <span class="zone-num">ZONE 01</span>
       <h2>必盯大人物</h2>
-      <p class="zone-desc">这些人/公司发的帖都是一手消息源，雷达默认监控名单 = 第一梯队。</p>
+      <p class="zone-desc">第一梯队：他们发的消息直接影响整个 AI 圈的走向。公司动向、模型发布、技术路线，都从这里开始。</p>
     </div>
 
-    <div class="subzone">
+    <div class="subzone" id="sub-a">
       <h3>A. 海外顶级创始人/CEO <span class="count">13</span></h3>
       <div class="grid">
         
@@ -548,7 +559,7 @@ footer .footer-bottom { color: var(--text-lighter); font-size: 0.85rem; }
       </div>
     </div>
 
-    <div class="subzone">
+    <div class="subzone" id="sub-b">
       <h3>B. 学院派 / 独立研究员 <span class="count">5</span></h3>
       <div class="grid">
         
@@ -629,7 +640,7 @@ footer .footer-bottom { color: var(--text-lighter); font-size: 0.85rem; }
       </div>
     </div>
 
-    <div class="subzone">
+    <div class="subzone" id="sub-c">
       <h3>C. 国内顶级创始人/CEO <span class="count">4</span></h3>
       <div class="grid">
         
@@ -701,7 +712,7 @@ footer .footer-bottom { color: var(--text-lighter); font-size: 0.85rem; }
     <div class="zone-header">
       <span class="zone-num">ZONE 02</span>
       <h2>必盯 AI 公司</h2>
-      <p class="zone-desc">雷达第二梯队：公司官方号，发版本/论文/招聘的第一现场。</p>
+      <p class="zone-desc">第二梯队：公司官方账号，新版本、论文、招聘、开源项目的第一发布现场。</p>
     </div>
     <div class="subzone">
       <h3>公司号 <span class="count">19</span></h3>
@@ -981,7 +992,7 @@ footer .footer-bottom { color: var(--text-lighter); font-size: 0.85rem; }
     <div class="zone-header">
       <span class="zone-num">ZONE 03</span>
       <h2>值得跟的行业媒体</h2>
-      <p class="zone-desc">雷达第三梯队：补充覆盖面，覆盖技术、商业、消费等多视角。</p>
+      <p class="zone-desc">第三梯队：AI 行业媒体，覆盖技术、商业、政策、消费等多维视角，帮你补齐信息盲区。</p>
     </div>
     <div class="subzone">
       <h3>AI 媒体矩阵 <span class="count">13</span></h3>
@@ -1151,7 +1162,7 @@ footer .footer-bottom { color: var(--text-lighter); font-size: 0.85rem; }
     <div class="zone-header">
       <span class="zone-num">ZONE 04</span>
       <h2>补充人物 · 扫一眼区</h2>
-      <p class="zone-desc">不是必盯，但有大动作时会火。叔叔想加谁直接说。</p>
+      <p class="zone-desc">不是日常必跟，但有大动作、大论文、大新闻时一定会火的人物，路过扫一眼就行。</p>
     </div>
     <div class="subzone">
       <h3>补充监控名单 <span class="count">12</span></h3>
